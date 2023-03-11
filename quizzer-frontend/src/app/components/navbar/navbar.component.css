@@ -1,0 +1,7 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+.col{
+    background-color: rgba(21, 26, 30, 0.83);
+    color: white;
+}

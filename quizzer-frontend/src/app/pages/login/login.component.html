@@ -1,0 +1,60 @@
+<div class="bootstrap-wrapper" >
+    <div class="container"  >
+        <div class="row" >
+            <div class="col-md-6 offset-md-3 " style="margin-top: 80px;">
+               
+
+                <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/logo.png" alt="icon">
+                </div>
+
+                <h1 class="text-center">
+                    Login Here !!!
+                </h1>
+                <form >
+
+                    <!-- UserName -->
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>User Name</mat-label>
+                        <mat-hint>Valid Username</mat-hint>
+                        <input
+                         [(ngModel)]="loginData.username"
+                         name="username"
+                        required
+                         matInput placeholder="Enter your Username">
+                      </mat-form-field>
+
+
+                      <!-- Password -->
+                       <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input
+                        [(ngModel)]="loginData.password"
+                        name="password"
+                        required
+                        type="password"
+                         matInput placeholder="Enter your Password">
+                      </mat-form-field>
+
+                      <div class="cotainer text-center">
+                        <button 
+                        (click)="formSubmit()"
+                        mat-raised-button  type="submit" style="margin-right: 50px; background-color: #37383d; color:white">
+                            Login
+                        </button>
+
+                        <button
+                        (click)="reset()"
+                         mat-raised-button color="warn" style="margin-left: 50px;" >
+                            Reset
+                        </button>
+                      </div>
+                </form>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,47 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card style="margin-top: 20px ;">
+                    <mat-card-header>
+                       <mat-card-title>
+                         Read Instructions Carefully
+                       </mat-card-title>
+                       <mat-card-subtitle>
+                        One more step to go
+                       </mat-card-subtitle>
+                    </mat-card-header>
+                    <div style="padding: 0px 20px;">
+                        <mat-card-content>
+                            <h2 >{{quiz['title']}}</h2>
+                            <p style="font-size: 12px;">{{quiz['description']}}</p>
+                            <mat-divider></mat-divider>
+                              <br>
+                            <h2>Important Instructions</h2>
+
+                            <ul>
+                                <li style="margin-top: 20x;">You can attempt quiz any number of times</li>
+                                <li style="margin-top: 20px ;">There are <b>{{quiz['noOfQuestions']}}</b> questions in this quiz</li>
+                                <li style="margin-top: 20px ;">Time Alloted for Quiz is <b>{{quiz['noOfQuestions']}} Minutes.</b> </li>
+                                <li style="margin-top: 20px ;"> Each question is of <b>{{(quiz['maxMarks']/quiz['noOfQuestions']).toFixed(2)}}</b> mark.</li>
+                                <li style="margin-top: 20px ;">There is timer running on top right side of screen.</li>
+                                <li style="margin-top: 20px ;">Each question has four options out of which <b>only one</b> is correct.</li>
+                                <li style="margin-top: 20px;">Scroll <b>Up/Down</b> to for navigating to other questions.</li>
+                                <li style="margin-top: 20px ;">You can change your answer by navigating back to that question.</li>
+                                <li style="margin-top: 20px ;">You can submit your exam by pressing <b>submit</b> button present at bottom right of screen</li>
+                                <li style="margin-top: 20px ;">The quiz will be auto submitted once time finishes and your recent state of question will be considered for evaluation.</li>
+                                <li style="margin-top: 20px ;">Make sure you have active internet connection if test ends in between it will start from beginning.</li>
+                            </ul>
+                         </mat-card-content>
+                    </div>
+                    
+                    <mat-card-actions class="text-center">
+                         <button mat-raised-button color="primary"
+                          (click)="startQuiz()"
+                         >Start Quiz</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

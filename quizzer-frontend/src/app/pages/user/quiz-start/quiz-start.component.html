@@ -1,0 +1,140 @@
+<div class="bootstrap-wrapper">
+    <div class="container-fluid">
+       <div class="row">
+
+        <div class="col-md-3">
+            <mat-card style="margin-top: 35px;" class="sticky" >
+                <mat-card-header>
+                    <mat-card-title>
+                       Progress
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        Quiz will be auto submitted once timer reaches <b>00:00</b> 
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="text-center">
+                   
+                    <mat-spinner mode="determinate" style="margin: auto;" color="primary"  [value]="(timer/(this.questions.length *1*60))*100"
+                      *ngIf="timer>60"></mat-spinner>
+                        <mat-spinner mode="determinate" style="margin: auto;" color="warn"  [value]="(timer/(this.questions.length *1*60))*100"
+                      *ngIf="timer<=60 "></mat-spinner>
+                      <h3 style="margin-top: 10px;"> <b>{{timeLeft}}</b> <br> remaining</h3>
+                      
+                </mat-card-content>
+                <mat-card-header>
+                    <mat-card-title>
+                        Instructions
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                   
+              <hr>
+              <ul>
+                 <br>
+                <b><li>Don't press back button.</li></b>
+                <br>
+                <b><li>Switching tabs is not allowed.</li></b>
+                <br>
+                <b><li>Test can't be resumed but you may reattempt.</li></b>
+                <br>
+                <b><li>Click on Progress Bar for Navigation</li></b>
+                <br>
+                <b><li>The Progress bar will turn green if question is answered</li></b>
+                <br>
+                <b><li>You can clear change/clear answer any number of times before final submission.</li></b>
+                <br>
+                <b><li>All the Best!!</li></b>
+              </ul>
+            </mat-card-content>
+            </mat-card>
+
+           
+         
+        </div>
+
+        <div class="col-md-7">
+            <ng-container >
+                <p style="margin-top: 20px; font-size:large">On Going Quiz: <b>{{title}}</b></p>
+            </ng-container>
+        <mat-card *ngFor="let q of questions; let i=index" style="margin-top: 10px;">
+           <mat-card-content >
+            <div attr.id="{{title}}_{{q['quesId']}}">
+              <p> <b >Q. {{i+1}}</b> <span style="margin-left:10px" [innerHTML]="q['content']"> </span></p> 
+             <mat-divider></mat-divider>
+             <br>
+             
+             <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6">
+                  <input type="radio" [value]="q['option1']" [name]="i.toString()"
+                   [(ngModel)]="q['markedAnswer']"
+                   >
+                   
+                  {{q['option1']}}
+                </div>
+                <div class="col-md-6">
+                    <input type="radio" [value]="q['option2']" [name]="i.toString()" [(ngModel)]="q['markedAnswer']">
+                  {{q['option2']}}
+                </div>
+             </div>
+             <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6">
+                    <input type="radio" [value]="q['option3']" [name]="i.toString()" [(ngModel)]="q['markedAnswer']">
+                    {{q['option3']}}
+                </div>
+                <div class="col-md-6">
+                    <input type="radio" [value]="q['option4']" [name]="i.toString()" [(ngModel)]="q['markedAnswer']">
+                    {{q['option4']}}
+                </div>
+             </div>
+            </div>
+           </mat-card-content>
+           <mat-card-actions>
+             <button mat-raised-button 
+              (click)="q['markedAnswer']=null" 
+              class="mat-button-wrapper"
+               style="color:white;background-color:rgb(227, 80, 12)" >Clear</button>
+             
+           </mat-card-actions>
+        </mat-card>
+      
+        </div>
+  
+        <div class="col-md-2">
+        
+            <mat-card style="margin-top: 55px;" class="sticky">
+                    <mat-card-title>
+                        <h1 class="text-center" style="margin-top: 20px; font-size:large">Question Navigation Bar</h1>
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <p>use this for progress tracking</p>
+                    </mat-card-subtitle>
+                    
+           
+                <hr>
+              <div class="container-fluid ">
+                <div class="row" 
+                         style="margin:auto">
+                        <button 
+                        style="margin:10px; padding:10px; border-radius: 5px;"
+                        [ngStyle]=" q['markedAnswer']!=null ? {'background-color': '#3f51b5','color':'white'} :{}"
+                        *ngFor="let q of questions; let i=index"
+                         (click)="scrollToDiv(q['quesId'])">
+                           {{i+1}}
+                        </button> 
+                </div>
+                <div class="container text-center" style="margin-top: 20px;">
+                    <button mat-raised-button 
+                    style="color: white; background-color: green;"
+                    (click)="submitQuiz()"
+                    >SUBMIT</button>
+                 </div>
+              </div>
+            </mat-card>
+        </div>
+       </div>
+       
+    
+    </div>
+
+</div>
+

@@ -1,0 +1,14 @@
+.example-header-image {
+    background-image: url('../../../../assets/quiz.png');
+    background-size: cover;
+  }
+
+ .publish + span{
+  display: none;
+ } 
+.publish:hover +span{
+  display: inline-block;
+   font-size: small;
+   position: relative;
+   top: 6px;
+ }

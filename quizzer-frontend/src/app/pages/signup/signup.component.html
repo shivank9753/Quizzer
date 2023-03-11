@@ -1,0 +1,114 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-6 offset-md-3">
+                <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/logo.png" alt="icon">
+                </div>
+                <h1 class="text-center">
+                    Register Here !!!
+                </h1>
+
+                
+                <form >
+                     <!-- first Name -->
+
+                     <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>First Name</mat-label>
+                        <input  
+                        required
+                        [(ngModel)]="user.firstName"
+                        name="userName"
+                        matInput placeholder="Enter your first name"/>
+                      </mat-form-field>
+
+                       <!-- Last Name -->
+
+                       <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input 
+                        required
+                        [(ngModel)]="user.lastName"
+                        name="lastName"
+                         matInput placeholder="Enter your last name">
+                      </mat-form-field>
+
+                      <!-- Email Id -->
+
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Email Id</mat-label>
+                        <mat-hint>must be unique</mat-hint>
+                        <input
+                        required
+                        [(ngModel)]="user.emailId"
+                        name="emailId"
+                        type="email"
+                          matInput placeholder="Enter your Email Id">
+                      </mat-form-field>
+
+
+                    <!-- UserName -->
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>User Name</mat-label>
+                        <mat-hint>must be unique</mat-hint>
+                        <input
+                        required
+                        [(ngModel)]="user.username"
+                        name="userName"
+                         matInput placeholder="Enter your Username">
+                      </mat-form-field>
+
+                      <!-- Password -->
+
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input
+                        required
+                        type="password"
+                        [(ngModel)]="user.password"
+                        name="password"
+                         matInput placeholder="Enter your Password">
+                      </mat-form-field>
+
+                      <!-- Phone Number -->
+
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Phone Number</mat-label>
+                        <input 
+                        required
+                        type="number"
+                        [(ngModel)]="user.phone"
+                        name="password"
+                         matInput placeholder="Enter your Phone Number">
+                      </mat-form-field>
+
+                      <mat-slide-toggle
+                         name="active"
+                         [(ngModel)]="isAdmin"
+                         color="primary"
+                         style="margin: 20px 0px; "
+                        >
+                         Admin?
+                       </mat-slide-toggle>
+ 
+                     <div class="container text-center">
+                        <button 
+                        (click)="formSubmit()"
+                        mat-raised-button color="primary"  style="margin-right: 50px; background-color: #37383d; color:white" type="submit">
+                            Register
+                        </button>
+                        <button
+                        (click)="reset()"
+                         mat-raised-button color="warn" style="margin-left: 50px;" >
+                           Clear
+                        </button>
+                     </div>
+
+                </form>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+

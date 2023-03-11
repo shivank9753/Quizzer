@@ -1,0 +1,32 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <mat-card style="margin-top:40px">
+                    
+                        <mat-card-title >
+                            Quiz Result
+                        </mat-card-title>
+                  
+                    <mat-card-content class="text-center">
+                        <mat-divider></mat-divider>
+                        <h3 style="margin-top: 10px;">Marks Obtained: <b>{{result['marksGot']}}</b></h3>
+                        <mat-divider></mat-divider>
+                        <h3 style="margin-top: 10px;">Correct Answers: <b>{{result['correctAnswers']}}</b></h3>
+                        <mat-divider></mat-divider>
+                        <h3 style="margin-top: 10px;">Attempted Questions: <b>{{result['attempted']}}</b></h3>
+                        <mat-divider></mat-divider>
+                        <mat-divider></mat-divider>
+                        <h3 style="margin-top: 10px;">Attempt: <b>{{result['attemptNo']}}</b> </h3>
+                        <mat-divider></mat-divider>
+                    </mat-card-content>
+                    <mat-card-actions class="text-center">
+                        <button mat-raised-button style="color: white; background-color: #37383d;">Retry</button>
+                        <button style="margin-left:20px" mat-raised-button color="primary"
+                        [routerLink]="'/user/quiz/all'">Continue</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

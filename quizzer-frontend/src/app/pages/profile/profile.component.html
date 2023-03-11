@@ -1,0 +1,58 @@
+<mat-card>
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="container" *ngIf="user">
+
+                <div class="container text-center offset-md- -1" >
+                    <img src="../../../assets/default.png" alt="default" class="profile-image">
+                   <h1 style="margin-top: 10px; font-weight: 700;">{{user['firstName']}} {{user['lastName']}}</h1> 
+                </div>
+                <div class="row " >
+                    <div class="col-md-10 offset-md-2">
+                        <table class="table" >
+
+                            <tr  >
+                                <td style="width: 50%;" >User Id</td>
+                                <td >{{user['userId']}}</td>
+                            </tr>
+
+                            <tr >
+                                <td style="width: 50%;" >Username</td>
+                                <td >{{user['username']}}</td>
+                            </tr>
+
+                            <tr  >
+                                <td style="width: 50%;" >Firstname</td>
+                                <td >{{user['firstName']}}</td>
+                            </tr>
+                            <tr  >
+                                <td style="width: 50%;" >Lastname</td>
+                                <td >{{user['lastName']}}</td>
+                            </tr>
+                            <tr  >
+                                <td style="width: 50%;" >Email</td>
+                                <td >{{user['emailId']}}</td>
+                            </tr>
+                            <tr  >
+                                <td style="width: 50%;" >Phone</td>
+                                <td >{{user['phone']}}</td>
+                            </tr>
+                            <tr  >
+                                <td style="width: 50%;" >Role</td>
+                                <td >{{user['authorities'][0]['authority']}}</td>
+                            </tr>
+                            <tr  >
+                                <td style="width: 50%;" >Status</td>
+                                <td >{{user['enabled']?"ACTIVE":"INACTIVE"}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="text-center" style="padding-top:0px ;" >
+        <button mat-raised-button  style="margin-right: 10px; background-color: #37383d; color:white">EDIT</button>
+        <button  mat-raised-button color="primary" style="position: relative; left:40px">SHARE</button>
+      </mat-card-actions>
+</mat-card>

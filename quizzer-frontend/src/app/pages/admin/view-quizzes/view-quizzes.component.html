@@ -1,0 +1,64 @@
+<mat-list style="margin-top: 20px;">
+    <mat-list-item>
+        <div mat-line><h1>All Quizzes</h1></div>
+        <button 
+        *ngIf="isAdmin"
+        routerLink="/admin/add-quiz" mat-raised-button style="background-color: #37383d; color:white">Add New Quiz</button>
+    </mat-list-item>
+</mat-list>
+
+<mat-card style="margin-top: 15px;" *ngFor="let q of quizzes">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>
+           {{q['title']}}
+           <span  *ngIf="q['active'] && isAdmin" >
+            <mat-icon style="position: relative; top :7px;color:#3334d8bd"  class="publish"
+            >verified</mat-icon>
+            <span>Published</span>
+           </span>
+
+           <span  *ngIf="!q['active'] && isAdmin" >
+            <mat-icon style="position: relative; top :7px;color:#cb1b1bcc"  class="publish"
+            >unpublished</mat-icon>
+            <span> Not Published</span>
+           </span>
+           
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{q['category']['title']}}
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>{{q['description']}}</p>
+    </mat-card-content>
+    
+    <div class="bootstrap-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <mat-card-actions>
+                        <button mat-raised-button
+                        *ngIf="isAdmin"
+                         [routerLink]='["/admin/view-question/"+ q["quizId"]+ "/" + q["title"]]'  style="color:white; margin: 20px; background-color:green" >View</button>
+                         <button mat-raised-button
+                         *ngIf="!isAdmin"
+                          [routerLink]='["/user/instructions/"+ q["quizId"]]'  style="color:white; margin: 20px; background-color:green" >Start</button> 
+                        <button mat-stroked-button style="margin:20px; color:#11a390f7"> Max Marks :{{q['maxMarks']}}</button>
+                        <button mat-stroked-button style=" margin:20px; color:#ef6e10"> Questions :{{q['noOfQuestions']}}</button>
+                        <button mat-stroked-button color="warn" style="margin:20px;">Attempts </button>
+                        <button 
+                         *ngIf="isAdmin"
+                        [routerLink]="'/admin/quiz/update/'+ q['quizId']" mat-flat-button color="accent" style="margin:20px; "> MODIFY </button>
+                        <button *ngIf="isAdmin" mat-raised-button color="warn" style="margin:20px;" (click)="deleteQuiz(q['quizId'])"> DELETE </button>
+
+                    </mat-card-actions>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</mat-card>
+
+
