@@ -6,17 +6,11 @@ import Widgets from "../Widgets/Widgets";
 
 const AdminLayout = () => {
   return (
-    <div>
-      <div className="flex">
+    <div className="p-5 bg-[#E4E4E4] h-screen">
+      <div className="flex gap-5">
         <Sidebar />
         <div className="@apply flex-[6]">
           <Navbar />
-          <div className="flex p-5 gap-5">
-            <Widgets />
-            <Widgets />
-            <Widgets />
-            <Widgets />
-          </div>
           <Outlet />
         </div>
       </div>

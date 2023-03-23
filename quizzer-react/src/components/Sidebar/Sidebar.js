@@ -1,57 +1,104 @@
 import React from "react";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+import { MdQuiz } from "react-icons/md";
+import { TbHome2 } from "react-icons/tb";
+import { NavLink } from "react-router-dom";
+import { AiOutlineUser } from "react-icons/ai";
+import { BsClipboardCheck } from "react-icons/bs";
+import { MdOutlineCategory } from "react-icons/md";
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
+
 const Sidebar = () => {
   return (
-    <div className="@apply flex-[1] border-r-[0.5px] border-solid border-gray-300 min-h-screen bg-white">
-      <div className="h-14 flex justify-center items-center">
-        <span className="text-xl text-purple-500">Quizzer</span>
+    <div className="@apply flex-[1.25] min-h-[90vh] bg-gradient-to-b from-zinc-100 to-zinc-50 rounded-lg shadow-sm flex flex-col gap-5">
+      <div className="h-14 flex justify-start items-center gap-2 p-5">
+        <MdQuiz className="text-2xl" />
+        <span className="text-lg">Quizzer</span>
       </div>
-      <hr className="h-0 border-[0.5px] border-solid border-gray-300" />
-      <div className="pl-3 pr-3">
-        <ul>
-          <p className="text-xs font-bold mt-3 mb-1 text-gray-300">Main</p>
-          <li className="flex items-center cursor-pointer p-1 group">
-            <DashboardIcon className="text-lg text-gray-400 group-hover:text-purple-500 duration-300" />
-            <span className="text-sm ml-2 font-semibold text-gray-400 group-hover:text-black duration-300">
+      <div className="">
+        <ul className="p-5 gap-5 flex flex-col">
+          <NavLink to="/admin/home">
+            {({ isActive }) => (
+              <li className="flex items-center cursor-pointer text-lg hover:text-black duration-300">
+                <TbHome2
+                  className={`${isActive ? "text-black" : "text-zinc-400"}`}
+                />
+                <span
+                  className={`text-sm ml-2 duration-300 ${
+                    isActive ? "text-black" : "text-zinc-400"
+                  }`}
+                >
+                  Dashboard
+                </span>
+              </li>
+            )}
+          </NavLink>
+          <NavLink to="/admin/quiz">
+            {({ isActive }) => (
+              <li className="flex items-center cursor-pointer group">
+                <HiOutlineQuestionMarkCircle
+                  className={`text-lg group-hover:text-black duration-300 ${
+                    isActive ? "text-black" : "text-zinc-400"
+                  }`}
+                />
+                <span
+                  className={`text-sm ml-2 text-zinc-400 group-hover:text-black duration-300 ${
+                    isActive ? "text-black" : "text-zinc-400"
+                  }`}
+                >
+                  Quiz
+                </span>
+              </li>
+            )}
+          </NavLink>
+          <NavLink to="/admin/category">
+            {({ isActive }) => (
+              <li className="flex items-center cursor-pointer group">
+                <MdOutlineCategory
+                  className={`text-lg group-hover:text-black duration-300 ${
+                    isActive ? "text-black" : "text-zinc-400"
+                  }`}
+                />
+                <span
+                  className={`text-sm ml-2 text-zinc-400 group-hover:text-black duration-300 ${
+                    isActive ? "text-black" : "text-zinc-400"
+                  }`}
+                >
+                  Category
+                </span>
+              </li>
+            )}
+          </NavLink>
+          <NavLink to="/admin/profile">
+            {({ isActive }) => (
+              <li className="flex items-center cursor-pointer group">
+                <AiOutlineUser
+                  className={`text-lg group-hover:text-black duration-300 ${
+                    isActive ? "text-black" : "text-zinc-400"
+                  }`}
+                />
+                <span
+                  className={`text-sm ml-2 text-zinc-400 group-hover:text-black duration-300 ${
+                    isActive ? "text-black" : "text-zinc-400"
+                  }`}
+                >
+                  Profile
+                </span>
+              </li>
+            )}
+          </NavLink>
+        </ul>
+      </div>
+      <div className="mt-auto">
+        <ul className="p-5 gap-5 flex flex-col">
+          <li className="flex items-center cursor-pointer group">
+            <span className="text-sm ml-2 text-zinc-400 group-hover:text-black duration-300">
               Dashboard
             </span>
           </li>
-          <p className="text-xs font-bold mt-3 mb-1 text-gray-300">List</p>
-          <li>
-            <span className="text-sm ml-2 font-semibold">User</span>
-          </li>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Products</span>
-          </li>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Orders</span>
-          </li>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Delivery</span>
-          </li>
-          <p className="text-xs font-bold mt-3 mb-1 text-gray-300">Useful</p>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Stats</span>
-          </li>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Notifications</span>
-          </li>
-          <p className="text-xs font-bold mt-3 mb-1 text-gray-300">Service</p>
-          <li>
-            <span className="text-sm ml-2 font-semibold">System Health</span>
-          </li>
-          <li>
-            <span className="text-sm ml-2 font-semibold"> Logs</span>
-          </li>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Settings</span>
-          </li>
-          <p className="text-xs font-bold mt-3 mb-1 text-gray-300">User</p>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Profile</span>
-          </li>
-          <li>
-            <span className="text-sm ml-2 font-semibold">Logout</span>
+          <li className="flex items-center cursor-pointer group">
+            <span className="text-sm ml-2 text-zinc-400 group-hover:text-black duration-300">
+              Dashboard
+            </span>
           </li>
         </ul>
       </div>

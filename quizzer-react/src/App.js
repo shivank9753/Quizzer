@@ -9,6 +9,8 @@ import Admin from "./pages/Admin";
 import SuperAdmin from "./pages/SuperAdmin";
 import UserLayout from "./components/Layout/UserLayout";
 import AdminLayout from "./components/Layout/AdminLayout";
+import Category from "./pages/Category";
+import Quiz from "./pages/Quiz";
 
 function App() {
   return (
@@ -25,8 +27,10 @@ function App() {
           </Route>
         </Route>
         <Route element={<RequireAuth allowedRoles={[2002]} />}>
-          <Route element={<AdminLayout />}>
-            <Route path="admin" element={<Admin />} />
+          <Route path="admin" element={<AdminLayout />}>
+            <Route path="home" element={<Admin />} />
+            <Route path="quiz" element={<Quiz />} />
+            <Route path="category" element={<Category />} />
           </Route>
         </Route>
         <Route element={<RequireAuth allowedRoles={[2003]} />}>

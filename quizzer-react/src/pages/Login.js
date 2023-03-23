@@ -1,73 +1,157 @@
 import React from "react";
-import useAuth from "../hooks/useAuth";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import "./Register.css";
+import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL, routes } from "../constant/apiRoutes";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
+  let navigate = useNavigate();
   const { setAuth } = useAuth();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
-  const initialValues = { email: "", password: "" };
-  const onSubmit = (values) => {
-    console.log(values);
-    if (values) {
-      const user = values.email;
-      const pwd = values.password;
-      const roles = [2001, 2002, 2003];
-      const accessToken = "asdasdasdghasdgashdgjadg";
-      setAuth({ user, pwd, roles, accessToken });
-      navigate(from, { replace: true });
-    }
+  const initialValues = {
+    username: "",
+    password: "",
   };
+  const onSubmit = async (values, { resetForm }) => {
+    const loginData = {
+      username: values.username,
+      password: values.password,
+    };
+    console.log(loginData);
+    setAuth({ roles: [2001, 2002, 2003] });
+    navigate("/admin");
+    // try {
+    //   const result = await axios.post(
+    //     `${BASE_URL}${routes.loginUser}`,
+    //     loginData
+    //   );
+    //   if (result) {
+    //     navigate("/admin");
+    //   }
+    // } catch (error) {
+    //   toast.error(error.message);
+    // }
+  };
+
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid Email Format!").required("Required!"),
-    password: Yup.string().required("Required!"),
+    username: Yup.string().required("Required!"),
+    password: Yup.string().min(6).required("Required!"),
   });
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
+
   return (
-    <>
-      <div className="flex flex-row h-screen w-screen justify-center items-center p-5 bg-center bg-cover bg-no-repeat bg-bg-image">
-        <div className="block bg-cover bg-no-repeat h-[80vh] w-[40vw] max-w-[370px] bg-side-image" />
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmit}
-        >
-          <Form className="flex flex-col bg-white p-5 items-stretch h-[80vh] w-[40vw] justify-evenly">
-            <h1 className="text-[#8e84fb] text-2xl font-bold">Login</h1>
-            <Field
-              className="block p-2 border-b-2 border-b-[#dab0f8]"
-              type="email"
-              name="email"
-              placeholder="Email..."
-              id="email"
-            />
-            <ErrorMessage name="email" />
-            <Field
-              className="block p-2 border-b-2 border-b-[#dab0f8]"
-              type="password"
-              name="password"
-              placeholder="Password..."
-              id="password"
-            />
-            <ErrorMessage name="password" />
-            <button
-              className="p-2 bg-blue-500 text-white rounded hover:bg-purple-700 duration-300"
-              type="submit"
-            >
-              Login
-            </button>
-            <div className="signup_link">
-              Not a member?
-              <Link to="/register">Signup</Link>
+    <div className="selection:bg-rose-500 selection:text-white">
+      <div className="min-h-screen bg-rose-100 flex justify-center items-center">
+        <div className="p-8 flex-1">
+          <div className="bg-white rounded-3xl mx-auto overflow-hidden shadow-xl w-[80vw] md:w-1/2 lg:w-1/2">
+            <div className="relative h-28 bg-rose-500 rounded-bl-4xl ">
+              <svg
+                className="absolute bottom-0"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 320"
+              >
+                <path
+                  fill="#ffffff"
+                  fillOpacity={1}
+                  d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,122.7C960,160,1056,224,1152,245.3C1248,267,1344,245,1392,234.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                />
+              </svg>
             </div>
-          </Form>
-        </Formik>
+            <div className="px-10 pt-4 pb-8 bg-white rounded-tr-4xl">
+              <h1 className="text-2xl font-semibold text-gray-900">Login</h1>
+              <form className="" onSubmit={formik.handleSubmit}>
+                <div className=" mt-10 relative">
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    className={`peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600  ${
+                      formik.touched.username && formik.errors.username
+                        ? "placeholder-red-500"
+                        : ""
+                    }`}
+                    onChange={formik.handleChange}
+                    value={formik.values.username}
+                    onBlur={formik.handleBlur}
+                    placeholder={
+                      formik.touched.username && formik.errors.username
+                        ? formik.errors.username
+                        : ""
+                    }
+                  />
+                  <label
+                    htmlFor="username"
+                    className={
+                      formik.touched.username && formik.errors.username
+                        ? `absolute left-0 -top-3.5 text-red-600 text-sm
+                      `
+                        : "absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                    }
+                  >
+                    Username
+                  </label>
+                </div>
+                <div className=" mt-10 relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    className={`peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-rose-600  ${
+                      formik.touched.password && formik.errors.password
+                        ? "placeholder-red-500"
+                        : ""
+                    }`}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    onBlur={formik.handleBlur}
+                    placeholder={
+                      formik.touched.password && formik.errors.password
+                        ? formik.errors.password
+                        : ""
+                    }
+                  />
+                  <label
+                    htmlFor="password"
+                    className={
+                      formik.touched.password && formik.errors.password
+                        ? `absolute left-0 -top-3.5 text-red-600 text-sm
+                      `
+                        : "absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                    }
+                  >
+                    Password
+                  </label>
+                </div>
+                <input
+                  type="submit"
+                  value="Sign in"
+                  className="mt-12 px-4 py-2 rounded bg-rose-500 hover:bg-rose-400 text-white font-semibold text-center block w-full focus:outline-none focus:ring focus:ring-offset-2 focus:ring-rose-500 focus:ring-opacity-80 cursor-pointer"
+                />
+              </form>
+              <div className="mt-4 block text-sm text-center font-medium text-rose-600">
+                Not a member?
+                <Link
+                  to="/register"
+                  className="ml-2 text-sm text-center font-medium text-rose-600 hover:underline focus:outline-none focus:ring-2 focus:ring-rose-500"
+                >
+                  or Signup
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+      <ToastContainer />
+    </div>
   );
 };
 
